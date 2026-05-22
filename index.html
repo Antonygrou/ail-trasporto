@@ -220,4 +220,126 @@
                     <div class="trip-row">
                         <div class="trip-field">
                             <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
-                            <input type="date" class="date-input
+                            <input type="date" class="date-input" required />
+                        </div>
+                        <div class="trip-field">
+                            <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
+                            <input type="time" class="time-input" required />
+                        </div>
+                        <div style="width:38px;"></div>
+                    </div>
+
+                </div>
+                <button type="button" class="btn-add-date" id="addTripBtn">+ Aggiungi un altro giorno (Max 5)</button>
+            </div>
+
+            <button type="button" class="btn-submit" id="submitBtn">Apri su WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+            }
+
+            const MAX_TRIPS = 5;
+            const WHATSAPP_NUMBER = '393792857328';
+
+            const container = document.getElementById('tripsContainer');
+            const addBtn = document.getElementById('addTripBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            let tripIndex = 2;
+
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('.date-input').forEach(input => input.min = today);
+
+            const sanitize = (text) => text.replace(/[<>]/g, '').trim();
+
+            const formatDate = (date) => {
+                const [year, month, day] = date.split('-');
+                return `${day}/${month}/${year}`;
+            };
+
+            const updateAddButton = () => {
+                const rows = document.querySelectorAll('.trip-row');
+                addBtn.style.display = rows.length >= MAX_TRIPS ? 'none' : 'block';
+            };
+
+            addBtn.addEventListener('click', () => {
+                const rows = document.querySelectorAll('.trip-row');
+                if (rows.length >= MAX_TRIPS) return;
+
+                const row = document.createElement('div');
+                row.className = 'trip-row';
+                row.innerHTML = `
+                    <div class="trip-field">
+                        <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
+                        <input type="date" class="date-input" required min="${today}" />
+                    </div>
+                    <div class="trip-field">
+                        <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
+                        <input type="time" class="time-input" required />
+                    </div>
+                    <button type="button" class="btn-remove-date">×</button>
+                `;
+
+                row.querySelector('.btn-remove-date').addEventListener('click', () => {
+                    row.remove();
+                    updateAddButton();
+                });
+
+                container.appendChild(row);
+                updateAddButton();
+            };
+
+            submitBtn.addEventListener('click', () => {
+                const cognomeInput = document.getElementById('cognome');
+                const nomeInput = document.getElementById('nome');
+                const cittaInput = document.getElementById('citta');
+                const indirizzoInput = document.getElementById('indirizzo');
+
+                if (!cognomeInput.value || !nomeInput.value || !cittaInput.value || !indirizzoInput.value) {
+                    alert('Per favore, compila tutti i campi richiestі.');
+                    return;
+                }
+
+                const cognome = sanitize(cognomeInput.value);
+                const nome = sanitize(nomeInput.value);
+                const citta = sanitize(cittaInput.value);
+                const indirizzo = sanitize(indirizzoInput.value);
+                const rows = document.querySelectorAll('.trip-row');
+
+                let whatsappTrips = '';
+                let valid = true;
+
+                rows.forEach((row, index) => {
+                    const dInput = row.querySelector('.date-input');
+                    const tInput = row.querySelector('.time-input');
+
+                    if (!dInput.value || !tInput.value) {
+                        valid = false;
+                        return;
+                    }
+
+                    const fDate = formatDate(dInput.value);
+                    whatsappTrips += `   ${index + 1}) *${fDate}* ➜ ore *${tInput.value}*\n`;
+                });
+
+                if (!valid) {
+                    alert('Per favore, imposta data e ora per tutti i giorni.');
+                    return;
+                }
+
+                const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
+                                     `• *Paziente:* ${cognome} ${nome}\n` +
+                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
+                                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
+
+                window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
