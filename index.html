@@ -104,13 +104,13 @@
 
         .trip-row {
             display: grid;
-            grid-template-columns: 1.1fr 1fr auto;
-            gap: 10px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             align-items: end;
             background: rgba(255,255,255,.35);
             border: 1px solid rgba(255,255,255,.2);
             border-radius: 16px;
-            padding: 12px 10px;
+            padding: 14px 12px;
             margin-bottom: 12px;
             animation: fadeIn .25s ease;
         }
@@ -139,10 +139,12 @@
         .btn-add-date:hover { background: rgba(211,47,47,.12); }
 
         .btn-remove-date {
-            width: 38px; height: 48px; border: none; border-radius: 10px;
-            background: #e53935; color: white; font-size: 20px; cursor: pointer;
+            grid-column: span 2;
+            height: 38px; border: none; border-radius: 10px;
+            background: #e53935; color: white; font-size: 14px; font-weight: 600; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
             box-shadow: 0 3px 8px rgba(229,57,53,.2);
+            margin-top: 4px;
         }
         .btn-remove-date:hover { background: #c62828; }
 
@@ -157,8 +159,7 @@
         @media (max-width: 480px) {
             .container { padding: 20px; }
             .grid-2 { grid-template-columns: 1fr; gap: 0; }
-            .trip-row { grid-template-columns: 1fr; position: relative; padding-top: 38px; }
-            .btn-remove-date { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; font-size: 16px; }
+            .trip-row { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -179,23 +180,28 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label class="inner-label" for="cognome">Cognome</label>
-                    <input type="text" id="cognome" placeholder="Es. Rossi" required />
+                    <input type="text" id="cognome" placeholder="Es. Rossi" required enterkeyhint="next" />
                 </div>
                 <div class="form-group">
                     <label class="inner-label" for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Es. Giulio" required />
+                    <input type="text" id="nome" placeholder="Es. Giulio" required enterkeyhint="next" />
                 </div>
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
                     <label class="inner-label" for="citta">Città</label>
-                    <input type="text" id="citta" placeholder="Es. Novara" required />
+                    <input type="text" id="citta" placeholder="Es. Novara" required enterkeyhint="next" />
                 </div>
                 <div class="form-group">
                     <label class="inner-label" for="indirizzo">Via e Civico</label>
-                    <input type="text" id="indirizzo" placeholder="Es. Via Verga 12" required />
+                    <input type="text" id="indirizzo" placeholder="Es. Via Verga 12" required enterkeyhint="next" />
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label class="inner-label" for="note">Note aggiuntive (Opzionale)</label>
+                <input type="text" id="note" placeholder="Es. sedia a rotelle, accompagnatore..." enterkeyhint="done" />
             </div>
 
             <div class="form-group">
@@ -211,7 +217,6 @@
                             <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                             <input type="time" class="time-input" required />
                         </div>
-                        <div style="width:38px;"></div>
                     </div>
 
                 </div>
@@ -274,13 +279,13 @@
                 row.innerHTML = `
                     <div class="trip-field">
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
-                        <input type="date" class="date-input" required min="${today}" />
+                        <input type="date" class="date-input" required />
                     </div>
                     <div class="trip-field">
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                         <input type="time" class="time-input" required />
                     </div>
-                    <button type="button" class="btn-remove-date" aria-label="Rimuovi viaggio">×</button>
+                    <button type="button" class="btn-remove-date">Elimina questo giorno</button>
                 `;
 
                 row.querySelector('.btn-remove-date').addEventListener('click', () => {
@@ -289,6 +294,10 @@
                 });
 
                 container.appendChild(row);
+                
+                // Активуємо захист від дат "на вчора" для кожного нового рядка
+                row.querySelector('.date-input').min = today;
+                
                 tripIndex++;
                 updateAddButton();
             };
@@ -334,10 +343,15 @@
                     return;
                 }
 
+                // Зчитуємо та очищуємо поле приміток
+                const noteInput = document.getElementById('note');
+                const noteText = noteInput.value ? sanitize(noteInput.value) : 'Nessuna';
+
                 const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
                                      `• *Cognome:* ${cognome}\n` +
                                      `• *Nome:* ${nome}\n` +
-                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
+                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n` +
+                                     `• *Note:* ${noteText} 📝\n\n` +
                                      `• *Viaggi richiesti:*\n${whatsappTrips}`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
