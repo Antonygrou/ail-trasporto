@@ -20,13 +20,12 @@
             --primary-dark: #b71c1c;
             --green: #25D366;
             --green-dark: #128C7E;
-            /* ✨ УЛЬТРА-СКЛО: Ще прозоріший фон (0.15 замість 0.25) */
-            --glass: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --text: #000000;
-            --text-light: #111;
-            /* ✨ Покращена тінь для кращого відділення від фону */
-            --shadow: 0 25px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.5);
+            /* ✨ ОПТИМАЛЬНА ПРОЗОРІСТЬ: Повертаємо надійну базу (0.75), щоб текст ідеально читався */
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --text: #111111;
+            --text-light: #444444;
+            --shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
             --radius: 24px;
         }
 
@@ -40,7 +39,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
+            background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
                         url('background.jpg') center center / cover no-repeat fixed;
             color: var(--text);
         }
@@ -49,30 +48,28 @@
             width: 100%;
             max-width: 480px;
             background: var(--glass);
-            /* ✨ Збільшене розмиття для кращого ефекту скла */
-            backdrop-filter: blur(50px) saturate(220%);
-            -webkit-backdrop-filter: blur(50px) saturate(220%);
+            /* ✨ Залишаємо м'яке розмиття, щоб задній фон делікатно просвічувався */
+            backdrop-filter: blur(25px) saturate(170%);
+            -webkit-backdrop-filter: blur(25px) saturate(170%);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
             padding: 26px;
             box-shadow: var(--shadow);
-            animation: fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            /* ✨ Тінь для тексту, щоб він не губився на фоні */
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+            animation: fadeUp 0.5s ease;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .header { text-align: center; margin-bottom: 22px; }
         .logo { max-width: 130px; height: auto; margin-bottom: 12px; }
-        h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); text-shadow: 0 2px 2px rgba(0,0,0,0.15), 0 0 1px rgba(255, 255, 255, 0.8); }
-        .subtitle { margin-top: 2px; font-size: 14px; font-weight: 700; color: #000; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6); }
+        h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); }
+        .subtitle { margin-top: 2px; font-size: 14px; font-weight: 600; color: #222; }
 
         .info-box {
-            background: rgba(211, 47, 47, 0.15);
+            background: rgba(211, 47, 47, 0.08);
             border-left: 4px solid var(--primary);
             border-radius: 14px;
             padding: 12px 14px;
@@ -80,34 +77,31 @@
             line-height: 1.4;
             color: var(--primary-dark);
             margin-bottom: 22px;
-            font-weight: 700;
-            text-shadow: none;
+            font-weight: 600;
         }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .form-group { margin-bottom: 14px; width: 100%; }
-        /* ✨ Чіткіший текст лейблів */
-        .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: #000; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
+        .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #222; }
 
         input {
             width: 100%;
             height: 48px;
-            border: 1px solid rgba(0,0,0,0.2);
+            border: 1px solid rgba(0,0,0,0.15);
             border-radius: 12px;
             padding: 0 14px;
             font-size: 15px;
             font-weight: 500;
             color: var(--text);
-            background: rgba(255,255,255,0.3);
-            transition: all 0.25s ease;
-            text-shadow: none;
+            background: rgba(255,255,255,0.5);
+            transition: .2s ease;
         }
 
         input:focus {
             outline: none;
             border-color: var(--primary);
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 0 0 4px rgba(211,47,47,0.2);
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 0 4px rgba(211,47,47,0.12);
         }
 
         .trip-row {
@@ -115,13 +109,12 @@
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             align-items: end;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.4);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 16px;
             padding: 14px 12px;
             margin-bottom: 12px;
-            animation: fadeIn 0.3s ease;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            animation: fadeIn .25s ease;
         }
 
         @keyframes fadeIn {
@@ -134,47 +127,39 @@
         .btn-add-date {
             width: 100%;
             border: 1px dashed var(--primary);
-            background: rgba(211, 47, 47, 0.1);
+            background: rgba(211, 47, 47, 0.06);
             color: var(--primary);
             border-radius: 12px;
             padding: 13px;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: .2s ease;
             margin-top: 2px;
             margin-bottom: 14px;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
         }
-        .btn-add-date:hover { background: rgba(211,47,47,0.18); }
-        .btn-add-date:active { transform: scale(0.97); background: rgba(211,47,47,0.25); }
+        .btn-add-date:hover { background: rgba(211,47,47,0.12); }
 
         .btn-remove-date {
             grid-column: span 2;
             height: 38px; border: none; border-radius: 10px;
             background: #e53935; color: white; font-size: 14px; font-weight: 600; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 3px 10px rgba(229,57,53,0.35);
+            box-shadow: 0 3px 8px rgba(229,57,53,0.2);
             margin-top: 4px;
-            transition: all 0.2s ease;
-            text-shadow: none;
         }
         .btn-remove-date:hover { background: #c62828; }
-        .btn-remove-date:active { transform: scale(0.98); }
 
         .btn-submit {
             width: 100%; margin-top: 8px; border: none; border-radius: 14px;
             background: var(--green); color: white; height: 52px;
-            font-size: 16px; font-weight: 800; cursor: pointer; 
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+            font-size: 16px; font-weight: 700; cursor: pointer; transition: .2s ease;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.25);
         }
         .btn-submit:hover { background: var(--green-dark); }
-        .btn-submit:active { transform: scale(0.98); }
 
         @media (max-width: 480px) {
-            .container { padding: 20px; background: rgba(255, 255, 255, 0.2); }
+            .container { padding: 20px; background: rgba(255, 255, 255, 0.75); }
             .grid-2 { grid-template-columns: 1fr; gap: 0; }
             .trip-row { grid-template-columns: 1fr 1fr; }
         }
@@ -186,11 +171,11 @@
         <div class="header">
             <img src="logo.png" alt="AIL Logo" class="logo" />
             <h1>AIL Novara</h1>
-            <p class="subtitle">Prenotazione Trasporto</p>
+            <p class="subtitle">Prenotazione Orario di Trasporto</p>
         </div>
 
         <div class="info-box">
-            Completare tutti i campi richiesti. Al termine verrà generato un messaggio pronto da inviare via WhatsApp.
+            <strong>Servizio Trasporto:</strong> Compila i campi richiesti. I dettagli verranno aperti direttamente su WhatsApp.
         </div>
 
         <div class="form-mock">
@@ -227,11 +212,11 @@
                     
                     <div class="trip-row">
                         <div class="trip-field">
-                            <label class="inner-label" style="font-size: 10px; color: var(--text-light); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);">Data 🗓️</label>
+                            <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
                             <input type="date" class="date-input" required />
                         </div>
                         <div class="trip-field">
-                            <label class="inner-label" style="font-size: 10px; color: var(--text-light); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);">Ora ⏰</label>
+                            <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                             <input type="time" class="time-input" required />
                         </div>
                     </div>
@@ -244,7 +229,7 @@
             </div>
 
             <button type="button" class="btn-submit" id="submitBtn">
-                Genera Messaggio WhatsApp
+                Apri su WhatsApp
             </button>
         </div>
     </div>
@@ -256,7 +241,6 @@
             }
 
             const MAX_TRIPS = 5;
-            // 📞 Головний номер координатора організації для первинного чату
             const WHATSAPP_NUMBER = '393792857328';
 
             const container = document.getElementById('tripsContainer');
@@ -296,11 +280,11 @@
 
                 row.innerHTML = `
                     <div class="trip-field">
-                        <label class="inner-label" style="font-size: 10px; color: var(--text-light); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);">Data 🗓️</label>
+                        <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
                         <input type="date" class="date-input" required />
                     </div>
                     <div class="trip-field">
-                        <label class="inner-label" style="font-size: 10px; color: var(--text-light); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);">Ora ⏰</label>
+                        <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                         <input type="time" class="time-input" required />
                     </div>
                     <button type="button" class="btn-remove-date">Elimina questo giorno</button>
@@ -312,7 +296,6 @@
                 });
 
                 container.appendChild(row);
-                // Активуємо захист від дат "на вчора" для кожного нового рядка
                 row.querySelector('.date-input').min = today;
                 
                 tripIndex++;
@@ -360,7 +343,6 @@
                     return;
                 }
 
-                // Зчитуємо та очищуємо поле приміток
                 const noteInput = document.getElementById('note');
                 const noteText = noteInput.value ? sanitize(noteInput.value) : 'Nessuna';
 
@@ -371,11 +353,6 @@
                                      `• *Note:* ${noteText} 📝\n\n` +
                                      `• *Viaggi richiesti:*\n${whatsappTrips}`;
 
-                /* 📧 ТУТ МІСЦЕ ДЛЯ EMAILJS (Коли підключимо сервіс, код відправки на пошту буде тут):
-                   emailjs.send("service_id", "template_id", { ... });
-                */
-
-                // 📱 Відкриваємо чат з головним номером
                 window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
             });
         });
