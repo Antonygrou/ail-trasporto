@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>AIL Novara - Prenotazione Trasporto</title>
-    
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#d32f2f" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -326,10 +325,12 @@
                     return;
                 }
 
-                const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
-                                     `• *Paziente:* ${cognome} ${nome}\n` +
-                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
-                                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
+                const whatsappText = //  НОВИЙ ШМАТОК (Встав його замість старого):
+const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
+                     `• *Cognome:* ${cognome}\n` +
+                     `• *Nome:* ${nome}\n` +
+                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
+                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
             });
