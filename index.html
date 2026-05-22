@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
     <title>AIL Novara - Prenotazione Trasporto</title>
-    
+
     <link rel="manifest" href="manifest.json" />
+
     <meta name="theme-color" content="#d32f2f" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="AIL Trasporto" />
+
     <link rel="apple-touch-icon" href="icon.png" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -20,16 +23,29 @@
             --primary-dark: #b71c1c;
             --green: #25D366;
             --green-dark: #128C7E;
-            --glass: rgba(255, 255, 255, 0.86);
+
+            --glass: rgba(255, 255, 255, 0.82);
             --glass-border: rgba(255, 255, 255, 0.45);
+
             --text: #111;
             --text-light: #555;
-            --shadow: 0 20px 40px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.6);
+
+            --shadow:
+                0 20px 40px rgba(0,0,0,.18),
+                inset 0 1px 0 rgba(255,255,255,.6);
+
             --radius: 24px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -38,9 +54,9 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            /* Залізобетонно підключаємо твій локальний фон */
-            background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.22)),
-                        url('background.jpg') center center / cover no-repeat fixed;
+            background:
+                linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.22)),
+                url('background.jpg') center center / cover no-repeat fixed;
             color: var(--text);
         }
 
@@ -55,8 +71,6 @@
             padding: 26px;
             box-shadow: var(--shadow);
             animation: fadeUp .5s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         @keyframes fadeUp {
@@ -64,19 +78,29 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .header { text-align: center; margin-bottom: 22px; }
-        
-        /* Стиль для відображення твого оригінального логотипу */
-        .logo-img { 
-            width: 100%; 
-            max-width: 240px; 
-            height: auto; 
-            margin: 0 auto 10px auto; 
-            display: block;
+        .header {
+            text-align: center;
+            margin-bottom: 22px;
         }
-        
-        h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); }
-        .subtitle { margin-top: 2px; font-size: 14px; font-weight: 600; color: #222; }
+
+        .logo-container {
+            width: 120px;
+            margin: 0 auto 12px auto;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -.6px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+        }
 
         .info-box {
             background: rgba(211, 47, 47, 0.07);
@@ -90,9 +114,25 @@
             font-weight: 500;
         }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .form-group { margin-bottom: 14px; }
-        .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #333; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .inner-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: #333;
+        }
 
         input {
             width: 100%;
@@ -132,12 +172,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .trip-field { display: flex; flex-direction: column; }
+        .trip-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="date"]::before { content: "Seleziona data 🗓️"; color: #555; width: 100%; font-weight: 500; }
+        input[type="date"]:focus::before, input[type="date"]:valid::before { display: none; }
+        
+        input[type="time"]::before { content: "Scegli ora ⏰"; color: #555; width: 100%; font-weight: 500; }
+        input[type="time"]:focus::before, input[type="time"]:valid::before { display: none; }
 
         .btn-add-date {
             width: 100%;
             border: 1px dashed var(--primary);
-            background: rgba(211, 47, 47, 0.06);
+            background: rgba(211,47,47,.06);
             color: var(--primary);
             border-radius: 12px;
             padding: 13px;
@@ -148,64 +197,48 @@
             margin-top: 2px;
             margin-bottom: 14px;
         }
-        .btn-add-date:hover { background: rgba(211,47,47,.12); }
+
+        .btn-add-date:hover {
+            background: rgba(211,47,47,.12);
+        }
 
         .btn-remove-date {
-            width: 38px; height: 48px; border: none; border-radius: 10px;
-            background: #e53935; color: white; font-size: 20px; cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
+            width: 38px;
+            height: 48px;
+            border: none;
+            border-radius: 10px;
+            background: #e53935;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: .2s ease;
             box-shadow: 0 3px 8px rgba(229,57,53,.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .btn-remove-date:hover { background: #c62828; }
+
+        .btn-remove-date:hover {
+            background: #c62828;
+        }
 
         .btn-submit {
-            width: 100%; border: none; border-radius: 14px;
-            background: var(--green); color: white; height: 52px;
-            font-size: 16px; font-weight: 700; cursor: pointer; transition: .2s ease;
+            width: 100%;
+            margin-top: 8px;
+            border: none;
+            border-radius: 14px;
+            background: var(--green);
+            color: white;
+            height: 52px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
             box-shadow: 0 6px 18px rgba(37, 211, 102,.25);
         }
-        .btn-submit:hover { background: var(--green-dark); }
-        .btn-submit.disabled { background: #999; pointer-events: none; box-shadow: none; }
 
-        /* Скляне вікно успіху */
-        .success-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.96);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            text-align: center;
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-        .container.show-success .success-overlay {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .success-icon {
-            width: 80px; height: 80px;
-            background: rgba(37, 211, 102, 0.1);
-            color: var(--green);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
-        .success-title { font-size: 22px; font-weight: 800; color: #111; margin-bottom: 10px; }
-        .success-text { font-size: 15px; color: #444; line-height: 1.5; margin-bottom: 25px; }
-        
-        .btn-whatsapp-redirect {
-            background-color: var(--green); color: white; border: none; padding: 14px 24px;
-            font-size: 15px; font-weight: 700; border-radius: 12px; cursor: pointer;
-            transition: .2s ease; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
-            text-decoration: none; display: inline-block;
+        .btn-submit:hover {
+            background: var(--green-dark);
         }
 
         @media (max-width: 480px) {
@@ -218,37 +251,39 @@
 </head>
 
 <body>
-    <div class="container" id="mainContainer">
-        
-        <div class="success-overlay">
-            <div class="success-icon">✓</div>
-            <div class="success-title">Richiesta Registrata!</div>
-            <div class="success-text">
-                I tuoi dati sono stati salvati con successo nel database di AIL Novara.<br><br>
-                <strong>Adesso si aprirà WhatsApp</strong> per inviare il riepilogo al conducente.
-            </div>
-            <button type="button" class="btn-whatsapp-redirect" id="popupActionBtn">Apri WhatsApp Manualmente</button>
-        </div>
 
+    <div class="container">
         <div class="header">
-            <img src="logo.png" alt="AIL Logo" class="logo-img">
+            <div class="logo-container">
+                <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="25" cy="15" r="4" fill="#111" />
+                    <path d="M17 45 C 17 30, 33 30, 33 45" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M21 25 L 29 25 M 25 21 L 25 38" stroke="#d32f2f" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="50" cy="15" r="4" fill="#d32f2f" />
+                    <path d="M42 45 C 42 30, 58 30, 58 45" stroke="#d32f2f" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M46 25 L 54 25 M 50 21 L 50 38" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="75" cy="15" r="4" fill="#111" />
+                    <path d="M67 45 C 67 30, 83 30, 83 45" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M71 21 L 71 42 C 71 42, 75 45, 79 40" stroke="#0d47a1" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+            </div>
             <h1>AIL Novara</h1>
             <p class="subtitle">Prenotazione Orario di Trasporto</p>
         </div>
 
         <div class="info-box">
-            <strong>Invia Richiesta:</strong> Compila i campi richiesti. I dettagli verranno registrati nel database e pronti per l'invio via WhatsApp.
+            <strong>Servizio Trasporto:</strong> Compila i campi richiesti. I dettagli verranno aperti direttamente su WhatsApp.
         </div>
 
         <div class="form-mock">
             <div class="grid-2">
                 <div class="form-group">
                     <label class="inner-label" for="cognome">Cognome</label>
-                    <input type="text" id="cognome" placeholder="Es. Rossi" required />
+                    <input type="text" id="cognome" placeholder="Es. Fortina" autocomplete="family-name" required />
                 </div>
                 <div class="form-group">
                     <label class="inner-label" for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Es. Giulio" required />
+                    <input type="text" id="nome" placeholder="Es. Giulio" autocomplete="given-name" required />
                 </div>
             </div>
 
@@ -266,6 +301,7 @@
             <div class="form-group">
                 <label class="inner-label">Date e Orari Terapia</label>
                 <div id="tripsContainer">
+                    
                     <div class="trip-row">
                         <div class="trip-field">
                             <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
@@ -277,33 +313,40 @@
                         </div>
                         <div style="width:38px;"></div>
                     </div>
+
                 </div>
-                <button type="button" class="btn-add-date" id="addTripBtn">+ Aggiungi un altro giorno (Max 5)</button>
+
+                <button type="button" class="btn-add-date" id="addTripBtn">
+                    + Aggiungi un altro giorno (Max 5)
+                </button>
             </div>
 
-            <button type="button" class="btn-submit" id="submitBtn">Invia e apri WhatsApp</button>
+            <button type="button" class="btn-submit" id="submitBtn">
+                Apri su WhatsApp
+            </button>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+            }
+
             const MAX_TRIPS = 5;
             const WHATSAPP_NUMBER = '393792857328';
-            
-            // ⚠️ ВСТАВ СЮДИ ПОСИЛАННЯ НА GOOGLE APPS SCRIPT ПІСЛЯ ЙОГО ПУБЛІКАЦІЇ
-            const GOOGLE_SCRIPT_URL = 'ВСТАВИТИ_СЮДИ_ПОСИЛАННЯ_НА_СКРИПТ';
 
-            const mainContainer = document.getElementById('mainContainer');
             const container = document.getElementById('tripsContainer');
             const addBtn = document.getElementById('addTripBtn');
             const submitBtn = document.getElementById('submitBtn');
-            const popupActionBtn = document.getElementById('popupActionBtn');
 
-            let globalWhatsappUrl = '';
+            let tripIndex = 2;
+
             const today = new Date().toISOString().split('T')[0];
             document.querySelectorAll('.date-input').forEach(input => input.min = today);
 
             const sanitize = (text) => text.replace(/[<>]/g, '').trim();
+
             const formatDate = (date) => {
                 const [year, month, day] = date.split('-');
                 return `${day}/${month}/${year}`;
@@ -314,12 +357,13 @@
                 addBtn.style.display = rows.length >= MAX_TRIPS ? 'none' : 'block';
             };
 
-            addBtn.addEventListener('click', () => {
+            const createTripRow = () => {
                 const rows = document.querySelectorAll('.trip-row');
                 if (rows.length >= MAX_TRIPS) return;
 
                 const row = document.createElement('div');
                 row.className = 'trip-row';
+
                 row.innerHTML = `
                     <div class="trip-field">
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
@@ -329,7 +373,7 @@
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                         <input type="time" class="time-input" required />
                     </div>
-                    <button type="button" class="btn-remove-date">×</button>
+                    <button type="button" class="btn-remove-date" aria-label="Rimuovi viaggio">×</button>
                 `;
 
                 row.querySelector('.btn-remove-date').addEventListener('click', () => {
@@ -338,8 +382,11 @@
                 });
 
                 container.appendChild(row);
+                tripIndex++;
                 updateAddButton();
             };
+
+            addBtn.addEventListener('click', createTripRow);
 
             submitBtn.addEventListener('click', () => {
                 const cognomeInput = document.getElementById('cognome');
@@ -352,76 +399,39 @@
                     return;
                 }
 
+                const cognome = sanitize(cognomeInput.value);
+                const nome = sanitize(nomeInput.value);
+                const citta = sanitize(cittaInput.value);
+                const indirizzo = sanitize(indirizzoInput.value);
                 const rows = document.querySelectorAll('.trip-row');
-                let tripsArray = [];
+
                 let whatsappTrips = '';
                 let valid = true;
 
                 rows.forEach((row, index) => {
-                    const dInput = row.querySelector('.date-input');
-                    const tInput = row.querySelector('.time-input');
+                    const dateInput = row.querySelector('.date-input');
+                    const timeInput = row.querySelector('.time-input');
 
-                    if (!dInput.value || !tInput.value) {
+                    if (!dateInput.value || !timeInput.value) {
                         valid = false;
                         return;
                     }
 
-                    const fDate = formatDate(dInput.value);
-                    tripsArray.push(`${fDate} - ${tInput.value}`);
-                    whatsappTrips += `   ${index + 1}) *${fDate}* ➜ ore *${tInput.value}*\n`;
+                    const formattedDate = formatDate(dateInput.value);
+                    whatsappTrips += `   ${index + 1}) *${formattedDate}* ➜ ore *${timeInput.value}*\n`;
                 });
 
                 if (!valid) {
-                    alert('Per favore, imposta data e ora per tutti i giorni.');
+                    alert('Per favore, imposta data e ora per tutti i giorni aggiunti.');
                     return;
                 }
 
-                submitBtn.classList.add('disabled');
-                submitBtn.innerText = 'Registrazione...';
+                const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
+                                     `• *Paziente:* ${cognome} ${nome}\n` +
+                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
+                                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
 
-                const dataToSend = {
-                    cognome: sanitize(cognomeInput.value),
-                    nome: sanitize(nomeInput.value),
-                    citta: sanitize(cittaInput.value),
-                    indirizzo: sanitize(indirizzoInput.value),
-                    viaggi: tripsArray.join(' | ')
-                };
-
-                // ВІДПРАВКА В GOOGLE ТАБЛИЦЮ
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataToSend)
-                })
-                .then(() => {
-                    const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
-                                         `• *Paziente:* ${dataToSend.cognome} ${dataToSend.nome}\n` +
-                                         `• *Indirizzo:* ${dataToSend.indirizzo}, ${dataToSend.citta} 📍\n\n` +
-                                         `• *Viaggi richiesti:*\n${whatsappTrips}`;
-
-                    globalWhatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`;
-
-                    // Показуємо екран успіху
-                    mainContainer.classList.add('show-success');
-
-                    // Автоматично відкриваємо WhatsApp через 2.5 секунди
-                    setTimeout(() => {
-                        window.open(globalWhatsappUrl, '_blank');
-                    }, 2500);
-                })
-                .catch(err => {
-                    alert('Errore di connessione. Riprova.');
-                    submitBtn.classList.remove('disabled');
-                    submitBtn.innerText = 'Invia e apri WhatsApp';
-                });
-            });
-
-            popupActionBtn.addEventListener('click', () => {
-                if (globalWhatsappUrl) {
-                    window.open(globalWhatsappUrl, '_blank');
-                }
+                window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
             });
         });
     </script>
