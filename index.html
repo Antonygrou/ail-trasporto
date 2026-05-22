@@ -20,7 +20,6 @@
             --primary-dark: #b71c1c;
             --green: #25D366;
             --green-dark: #128C7E;
-            /* 🧱 НАДІЙНА ОСНОВА: Потужний контраст для ідеального читання тексту */
             --glass: rgba(255, 255, 255, 0.94);
             --glass-border: rgba(255, 255, 255, 0.6);
             --text: #111111;
@@ -54,7 +53,6 @@
             border-radius: var(--radius);
             padding: 26px;
             box-shadow: var(--shadow);
-            /* ✨ Залишаємо фірмову плавну анімацію появи */
             animation: fadeUp 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -69,7 +67,7 @@
         .subtitle { margin-top: 2px; font-size: 14px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.5px; }
 
         .info-box {
-            background: #ffebee; /* Чистий, контрастний ніжно-червоний фон */
+            background: #ffebee;
             border-left: 4px solid var(--primary);
             border-radius: 14px;
             padding: 12px 14px;
@@ -100,15 +98,15 @@
         input:focus {
             outline: none;
             border-color: var(--primary);
-            background: #ffffff;
             box-shadow: 0 0 0 4px rgba(211,47,47,0.12);
         }
 
+        /* ✨ ТУТ ВИПРАВЛЕНО: Рядок поїздок тепер гнучкий флексбокс */
         .trip-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: row;
             gap: 12px;
-            align-items: end;
+            align-items: flex-end;
             background: rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 16px;
@@ -122,7 +120,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .trip-field { display: flex; flex-direction: column; }
+        .trip-field { flex: 1; display: flex; flex-direction: column; }
 
         .btn-add-date {
             width: 100%;
@@ -134,7 +132,6 @@
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            /* ✨ ЖИВА КНОПКА: Плавний ефект пружини */
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 2px;
             margin-bottom: 14px;
@@ -143,7 +140,7 @@
         .btn-add-date:active { transform: scale(0.97); }
 
         .btn-remove-date {
-            grid-column: span 2;
+            width: 100%;
             height: 38px; border: none; border-radius: 10px;
             background: #d32f2f; color: white; font-size: 13px; font-weight: 700; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
@@ -160,7 +157,6 @@
             width: 100%; margin-top: 8px; border: none; border-radius: 14px;
             background: var(--green); color: white; height: 52px;
             font-size: 16px; font-weight: 700; cursor: pointer; 
-            /* ✨ ЖИВА КНОПКА: Ефект пружини при кліку */
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
         }
@@ -168,10 +164,18 @@
         .btn-submit:active { transform: scale(0.98); }
 
         @media (max-width: 480px) {
-            /* ✨ РОЗУМНА МОБІЛЬНА ПРОЗОРІСТЬ: Форма делікатно пропускає фон, але залишається ідеально читабельною */
-            .container { padding: 20px; background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(20px); }
+            .container { padding: 20px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); }
             .grid-2 { grid-template-columns: 1fr; gap: 0; }
-            .trip-row { grid-template-columns: 1fr 1fr; }
+            
+            /* ✨ МОБІЛЬНА АДАПТАЦІЯ: На телефонах поля дати та часу стають одне під одним */
+            .trip-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .btn-remove-date {
+                margin-top: 6px;
+            }
         }
     </style>
 </head>
