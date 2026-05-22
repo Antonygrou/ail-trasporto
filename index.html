@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>AIL Novara - Prenotazione Trasporto</title>
+    
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#d32f2f" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -124,7 +125,7 @@
         .btn-add-date {
             width: 100%;
             border: 1px dashed var(--primary);
-            background: rgba(211,47,47,.06);
+            background: rgba(211, 47, 47, 0.06);
             color: var(--primary);
             border-radius: 12px;
             padding: 13px;
@@ -246,6 +247,13 @@
 
             const sanitize = (text) => text.replace(/[<>]/g, '').trim();
 
+            const getItalianDayName = (dateString) => {
+                const days = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+                const dateParts = dateString.split('-');
+                const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                return days[dateObj.getDay()];
+            };
+
             const formatDate = (date) => {
                 const [year, month, day] = date.split('-');
                 return `${day}/${month}/${year}`;
@@ -317,7 +325,8 @@
                     }
 
                     const formattedDate = formatDate(dateInput.value);
-                    whatsappTrips += `   ${index + 1}) *${formattedDate}* ➜ ore *${timeInput.value}*\n`;
+                    const dayName = getItalianDayName(dateInput.value);
+                    whatsappTrips += `   ${index + 1}) *${dayName}* - ${formattedDate} ➜ ore *${timeInput.value}*\n`;
                 });
 
                 if (!valid) {
@@ -325,11 +334,11 @@
                     return;
                 }
 
-const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
-                     `• *Cognome:* ${cognome}\n` +
-                     `• *Nome:* ${nome}\n` +
-                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
-                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
+                const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n` +
+                                     `• *Cognome:* ${cognome}\n` +
+                                     `• *Nome:* ${nome}\n` +
+                                     `• *Indirizzo:* ${indirizzo}, ${citta} 📍\n\n` +
+                                     `• *Viaggi richiesti:*\n${whatsappTrips}`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
             });
