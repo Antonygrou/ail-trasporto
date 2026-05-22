@@ -20,12 +20,12 @@
             --primary-dark: #b71c1c;
             --green: #25D366;
             --green-dark: #128C7E;
-            /* ✨ ОПТИМАЛЬНА ПРОЗОРІСТЬ: Повертаємо надійну базу (0.75), щоб текст ідеально читався */
-            --glass: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            /* ✨ КЛАСИЧНИЙ ФОН: Повертаємо надійну щільність 0.85 для максимального контрасту */
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.45);
             --text: #111111;
-            --text-light: #444444;
-            --shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+            --text-light: #555555;
+            --shadow: 0 20px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.6);
             --radius: 24px;
         }
 
@@ -48,25 +48,25 @@
             width: 100%;
             max-width: 480px;
             background: var(--glass);
-            /* ✨ Залишаємо м'яке розмиття, щоб задній фон делікатно просвічувався */
             backdrop-filter: blur(25px) saturate(170%);
             -webkit-backdrop-filter: blur(25px) saturate(170%);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
             padding: 26px;
             box-shadow: var(--shadow);
-            animation: fadeUp 0.5s ease;
+            /* ✨ Залишаємо плавну фірмову анімацію появи */
+            animation: fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .header { text-align: center; margin-bottom: 22px; }
         .logo { max-width: 130px; height: auto; margin-bottom: 12px; }
-        h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); }
-        .subtitle { margin-top: 2px; font-size: 14px; font-weight: 600; color: #222; }
+        h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); text-shadow: 0 1px 0 rgba(0,0,0,0.05); }
+        .subtitle { margin-top: 2px; font-size: 14px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.5px; }
 
         .info-box {
             background: rgba(211, 47, 47, 0.08);
@@ -82,7 +82,7 @@
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .form-group { margin-bottom: 14px; width: 100%; }
-        .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #222; }
+        .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: #111111; }
 
         input {
             width: 100%;
@@ -93,8 +93,8 @@
             font-size: 15px;
             font-weight: 500;
             color: var(--text);
-            background: rgba(255,255,255,0.5);
-            transition: .2s ease;
+            background: rgba(255,255,255,0.6);
+            transition: all 0.25s ease;
         }
 
         input:focus {
@@ -114,7 +114,7 @@
             border-radius: 16px;
             padding: 14px 12px;
             margin-bottom: 12px;
-            animation: fadeIn .25s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
@@ -134,11 +134,13 @@
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: .2s ease;
+            /* ✨ ЖИВА КНОПКА: Ефект плавної пружини */
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 2px;
             margin-bottom: 14px;
         }
         .btn-add-date:hover { background: rgba(211,47,47,0.12); }
+        .btn-add-date:active { transform: scale(0.97); }
 
         .btn-remove-date {
             grid-column: span 2;
@@ -147,19 +149,24 @@
             display: flex; justify-content: center; align-items: center;
             box-shadow: 0 3px 8px rgba(229,57,53,0.2);
             margin-top: 4px;
+            transition: all 0.2s ease;
         }
         .btn-remove-date:hover { background: #c62828; }
+        .btn-remove-date:active { transform: scale(0.98); }
 
         .btn-submit {
             width: 100%; margin-top: 8px; border: none; border-radius: 14px;
             background: var(--green); color: white; height: 52px;
-            font-size: 16px; font-weight: 700; cursor: pointer; transition: .2s ease;
+            font-size: 16px; font-weight: 700; cursor: pointer; 
+            /* ✨ ЖИВА КНОПКА: Ефект плавної пружини при кліку */
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 6px 18px rgba(37, 211, 102, 0.25);
         }
         .btn-submit:hover { background: var(--green-dark); }
+        .btn-submit:active { transform: scale(0.98); }
 
         @media (max-width: 480px) {
-            .container { padding: 20px; background: rgba(255, 255, 255, 0.75); }
+            .container { padding: 20px; background: rgba(255, 255, 255, 0.85); }
             .grid-2 { grid-template-columns: 1fr; gap: 0; }
             .trip-row { grid-template-columns: 1fr 1fr; }
         }
