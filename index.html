@@ -62,7 +62,7 @@
         }
 
         .header { text-align: center; margin-bottom: 22px; }
-        .logo-container { width: 120px; margin: 0 auto 12px auto; }
+        .logo { max-width: 130px; height: auto; margin-bottom: 12px; }
         h1 { font-size: 26px; font-weight: 800; letter-spacing: -.6px; color: var(--primary); }
         .subtitle { margin-top: 2px; font-size: 14px; font-weight: 600; color: #222; }
 
@@ -79,7 +79,7 @@
         }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .form-group { margin-bottom: 14px; }
+        .form-group { margin-bottom: 14px; width: 100%; }
         .inner-label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #333; }
 
         input {
@@ -102,14 +102,13 @@
             box-shadow: 0 0 0 4px rgba(211,47,47,.12);
         }
 
-        /* Стильний скляний блок для рядка поїздки */
         .trip-row {
             display: grid;
             grid-template-columns: 1.1fr 1fr auto;
             gap: 10px;
             align-items: end;
-            background: rgba(255, 255, 255, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,.35);
+            border: 1px solid rgba(255,255,255,.2);
             border-radius: 16px;
             padding: 12px 10px;
             margin-bottom: 12px;
@@ -126,7 +125,7 @@
         .btn-add-date {
             width: 100%;
             border: 1px dashed var(--primary);
-            background: rgba(211, 47, 47, 0.06);
+            background: rgba(211,47,47,.06);
             color: var(--primary);
             border-radius: 12px;
             padding: 13px;
@@ -137,7 +136,6 @@
             margin-top: 2px;
             margin-bottom: 14px;
         }
-
         .btn-add-date:hover { background: rgba(211,47,47,.12); }
 
         .btn-remove-date {
@@ -149,11 +147,10 @@
         .btn-remove-date:hover { background: #c62828; }
 
         .btn-submit {
-            width: 100%; border: none; border-radius: 14px;
+            width: 100%; margin-top: 8px; border: none; border-radius: 14px;
             background: var(--green); color: white; height: 52px;
             font-size: 16px; font-weight: 700; cursor: pointer; transition: .2s ease;
             box-shadow: 0 6px 18px rgba(37, 211, 102,.25);
-            margin-top: 8px;
         }
         .btn-submit:hover { background: var(--green-dark); }
 
@@ -169,19 +166,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="25" cy="15" r="4" fill="#111" />
-                    <path d="M17 45 C 17 30, 33 30, 33 45" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <path d="M21 25 L 29 25 M 25 21 L 25 38" stroke="#d32f2f" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <circle cx="50" cy="15" r="4" fill="#d32f2f" />
-                    <path d="M42 45 C 42 30, 58 30, 58 45" stroke="#d32f2f" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <path d="M46 25 L 54 25 M 50 21 L 50 38" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <circle cx="75" cy="15" r="4" fill="#111" />
-                    <path d="M67 45 C 67 30, 83 30, 83 45" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <path d="M71 21 L 71 42 C 71 42, 75 45, 79 40" stroke="#0d47a1" stroke-width="4" fill="none" stroke-linecap="round"/>
-                </svg>
-            </div>
+            <img src="logo.png" alt="AIL Logo" class="logo" />
             <h1>AIL Novara</h1>
             <p class="subtitle">Prenotazione Orario di Trasporto</p>
         </div>
@@ -194,11 +179,11 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label class="inner-label" for="cognome">Cognome</label>
-                    <input type="text" id="cognome" placeholder="Es. Fortina" required autocomplete="off" />
+                    <input type="text" id="cognome" placeholder="Es. Rossi" required />
                 </div>
                 <div class="form-group">
                     <label class="inner-label" for="nome">Nome</label>
-                    <input type="text" id="nome" placeholder="Es. Giulio" required autocomplete="off" />
+                    <input type="text" id="nome" placeholder="Es. Giulio" required />
                 </div>
             </div>
 
@@ -230,10 +215,15 @@
                     </div>
 
                 </div>
-                <button type="button" class="btn-add-date" id="addTripBtn">+ Aggiungi un altro giorno (Max 5)</button>
+
+                <button type="button" class="btn-add-date" id="addTripBtn">
+                    + Aggiungi un altro giorno (Max 5)
+                </button>
             </div>
 
-            <button type="button" class="btn-submit" id="submitBtn">Apri su WhatsApp</button>
+            <button type="button" class="btn-submit" id="submitBtn">
+                Apri su WhatsApp
+            </button>
         </div>
     </div>
 
@@ -267,12 +257,13 @@
                 addBtn.style.display = rows.length >= MAX_TRIPS ? 'none' : 'block';
             };
 
-            addBtn.addEventListener('click', () => {
+            const createTripRow = () => {
                 const rows = document.querySelectorAll('.trip-row');
                 if (rows.length >= MAX_TRIPS) return;
 
                 const row = document.createElement('div');
                 row.className = 'trip-row';
+
                 row.innerHTML = `
                     <div class="trip-field">
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Data 🗓️</label>
@@ -282,7 +273,7 @@
                         <label class="inner-label" style="font-size: 10px; color: var(--text-light);">Ora ⏰</label>
                         <input type="time" class="time-input" required />
                     </div>
-                    <button type="button" class="btn-remove-date">×</button>
+                    <button type="button" class="btn-remove-date" aria-label="Rimuovi viaggio">×</button>
                 `;
 
                 row.querySelector('.btn-remove-date').addEventListener('click', () => {
@@ -291,8 +282,11 @@
                 });
 
                 container.appendChild(row);
+                tripIndex++;
                 updateAddButton();
             };
+
+            addBtn.addEventListener('click', createTripRow);
 
             submitBtn.addEventListener('click', () => {
                 const cognomeInput = document.getElementById('cognome');
@@ -301,7 +295,7 @@
                 const indirizzoInput = document.getElementById('indirizzo');
 
                 if (!cognomeInput.value || !nomeInput.value || !cittaInput.value || !indirizzoInput.value) {
-                    alert('Per favore, compila tutti i campi richiestі.');
+                    alert('Per favore, compila tutti i campi richiesti.');
                     return;
                 }
 
@@ -315,20 +309,20 @@
                 let valid = true;
 
                 rows.forEach((row, index) => {
-                    const dInput = row.querySelector('.date-input');
-                    const tInput = row.querySelector('.time-input');
+                    const dateInput = row.querySelector('.date-input');
+                    const timeInput = row.querySelector('.time-input');
 
-                    if (!dInput.value || !tInput.value) {
+                    if (!dateInput.value || !timeInput.value) {
                         valid = false;
                         return;
                     }
 
-                    const fDate = formatDate(dInput.value);
-                    whatsappTrips += `   ${index + 1}) *${fDate}* ➜ ore *${tInput.value}*\n`;
+                    const formattedDate = formatDate(dateInput.value);
+                    whatsappTrips += `   ${index + 1}) *${formattedDate}* ➜ ore *${timeInput.value}*\n`;
                 });
 
                 if (!valid) {
-                    alert('Per favore, imposta data e ora per tutti i giorni.');
+                    alert('Per favore, imposta data e ora per tutti i giorni aggiunti.');
                     return;
                 }
 
