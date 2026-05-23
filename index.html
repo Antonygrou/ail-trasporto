@@ -9,8 +9,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="AIL Trasporto" />
-<link rel="apple-touch-icon" href="icon.png" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link class="apple-touch-icon" href="icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
 <style>
 :root{
@@ -224,8 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const MAX_TRIPS = 5;
     const WHATSAPP_NUMBER = '393792857328';
     
-    // ✨ ЗВ'ЯЗОК З ТВОЇМ GOOGLE APPS SCRIPT
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwd2JCCA-wTMd0ZOKmv2Ya-gFX65JQLZwRW5ljJ8s7qN41Ej-Q8KKqWMDyWSHBveF3NXw/exec';
+    // ✨ ОНОВЛЕНИЙ ЗВ'ЯЗОК З ТВОЇМ НОВИМ СКРИПТОМ GOOGLE
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEUXcDrcnmTcBn1UwHqbyBuu_2wnm8-L12hCbj1sS3fTTWy5qFZF_tS66o4HTv0a6Eug/exec';
 
     const translations = {
         uk: {
@@ -360,67 +360,4 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const cognome = sanitize(cognomeInput.value);
-        const nome = sanitize(nomeInput.value);
-        const citta = sanitize(cittaInput.value);
-        const indirizzo = sanitize(indirizzoInput.value);
-        const noteText = noteInput.value ? sanitize(noteInput.value) : 'Nessuna';
-
-        const rows = document.querySelectorAll('.trip-row');
-        let whatsappTrips = '';
-        let valid = true;
-        
-        // Масиви для фонової відправки в Google Таблицю
-        let firstDate = '';
-        let firstTime = '';
-
-        rows.forEach((row, index) => {
-            const dateInput = row.querySelector('.date-input');
-            const timeInput = row.querySelector('.time-input');
-
-            if (!dateInput.value || !timeInput.value) {
-                valid = false;
-                return;
-            }
-            
-            if (index === 0) {
-                firstDate = dateInput.value; // YYYY-MM-DD
-                firstTime = timeInput.value; // HH:MM
-            }
-
-            const formattedDate = formatDate(dateInput.value);
-            const dayName = getItalianDayName(dateInput.value);
-            whatsappTrips += `   ${index + 1}) *${dayName}* - ${formattedDate} ➜ ore *${timeInput.value}*\n`;
-        });
-
-        if (!valid) {
-            alert(translations[lang].alertDates);
-            return;
-        }
-
-        // 📊 ФОНОВИЙ ЗАПИС В GOOGLE ТАБЛИЦЮ (Через місток)
-        const payload = {
-            cognome: cognome,
-            nome: nome,
-            citta: citta,
-            indirizzo: indirizzo,
-            date: firstDate,
-            time: firstTime
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }).catch(err => console.log('Errore tabella:', err));
-
-        // 📱 ВІДКРИТТЯ WHATSAPP
-        const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
-        window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
-    });
-});
-</script>
-</body>
-</html>
+        const cognome = sanitize(cognomeInput
