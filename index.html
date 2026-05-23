@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="AIL Trasporto" />
-<link align="apple-touch-icon" href="icon.png" />
+<link rel="apple-touch-icon" href="icon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
@@ -133,7 +133,6 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
 
 .footer{ margin-top:18px; text-align:center; font-size:12px; font-weight:600; color:rgba(0,0,0,0.65); }
 
-/* ✨ ЕКРАН УСПІХУ (SUCCESS SCREEN) */
 .success-screen {
     position: absolute; top:0; left:0; width:100%; height:100%;
     background:#ffffff; border-radius:var(--radius);
@@ -235,7 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MAX_TRIPS = 5;
     const WHATSAPP_NUMBER = '393792857328';
-   const script.google.com/macros/s/AKfycbzo2UypMpxV1qjkztSJ3vkXIdiXZz_VwZxZBbqU6CeVBf0P1yf8dSAAUHfFOKOGp7c6Bw/exec
+    
+    // ✨ ЗМІННУ ВІДНОВЛЕНО: Тепер посилання надійно прикріплено до коду
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTP8-DmS7qZo7Ok2yFVLiIEXV_XWUtiLjlvtr1-7jpzOhfUgormGsITvD-4ex8KLb4Hg/exec';
+
     const translations = {
         uk: {
             subtitle: "Бронювання часу транспортування",
@@ -312,21 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ✨ ЗАХИСТ ВІД МИНУЛИХ ДНІВ: Сьогоднішній день є мінімальним для вибору
     const today = new Date().toISOString().split('T')[0];
     
-    // Функція перевірки вихідного дня (Субота = 6, Неділя = 0)
     const checkWeekend = (inputElement) => {
         if (!inputElement.value) return;
         const dateObj = new Date(inputElement.value);
         const day = dateObj.getDay();
         if (day === 0 || day === 6) {
             alert(translations[lang].alertWeekend);
-            inputElement.value = ''; // Стираємо неправильний вибір
+            inputElement.value = '';
         }
     };
 
-    // Налаштовуємо перший інпут дати
     const firstDateInput = document.querySelector('.date-input');
     firstDateInput.min = today;
     firstDateInput.addEventListener('change', () => checkWeekend(firstDateInput));
@@ -431,11 +430,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Блокуємо кнопку, щоб уникнути повторних натискань
         submitBtn.disabled = true;
         submitBtn.innerText = 'Sending...';
 
-        // Відправляємо дані на Google Сервер
         let fetchPromises = tripsArray.map(trip => {
             const payload = {
                 cognome: cognome,
@@ -458,15 +455,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Promise.all(fetchPromises)
             .then(() => {
-                // ✨ КРОК УСПІХУ: Показуємо гарне підтвердження для пацієнта
                 document.getElementById('successScreen').classList.add('active');
                 
-                // Затримка 2 секунди, щоб людина прочитала повідомлення, перед переходом у WhatsApp
                 setTimeout(() => {
                     const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
                     window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
                     
-                    // Повертаємо початковий стан кнопки
                     submitBtn.disabled = false;
                     submitBtn.innerText = translations[lang].btnSubmit;
                     document.getElementById('successScreen').classList.remove('active');
