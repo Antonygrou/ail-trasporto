@@ -168,7 +168,7 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
     <div class="header">
         <img src="logo.png" alt="AIL Logo" class="logo" />
         <h1 id="lang-title">AIL Novara</h1>
-        <p class="subtitle" id="lang-subtitle">Prenotazione Orario di Trasporto</p>
+        <p class="subtitle" id="lang-subtitle">Prenotazione Orario di Transporto</p>
     </div>
 
     <div class="info-box" id="lang-infobox">
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MAX_TRIPS = 5;
     const WHATSAPP_NUMBER = '393792857328';
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTP8-DmS7qZo7Ok2yFVLiIEXV_XWUtiLjlvtr1-7jpzOhfUgormGsITvD-4ex8KLb4Hg/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwEjTx89kHbJ_gOtiR4JBs-SDkY1y8N04zgKB_IZNfzCVQgcBvfL3uMREY0N2eK0d9Eng/exec';
 
     const translations = {
         uk: {
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             titleTrips: "Date e Orari Trasporti",
             rowData: "Data 🗓️",
             rowOra: "Ora ⏰",
-            btnAdd: "+ Aungi un altro giorno (Max 5)",
+            btnAdd: "+ Aggiungi un altro giorno (Max 5)",
             btnSubmit: "Apri su WhatsApp",
             btnRemove: "Elimina questo giorno",
             alertFill: "Per favore, compila tutti i campi richiesti.",
@@ -314,11 +314,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const today = new Date().toISOString().split('T')[0];
     
+    // ✨ БЕЗПЕЧНА ПЕРЕВІРКА ВИХІДНИХ БЕЗ ЗСУВУ ЧАСУ
     const checkWeekend = (inputElement) => {
         if (!inputElement.value) return;
-        const dateObj = new Date(inputElement.value);
+        const parts = inputElement.value.split('-');
+        // Створюємо дату локально суто по цифрах року-місяця-дня
+        const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
         const day = dateObj.getDay();
-        if (day === 0 || day === 6) {
+        if (day === 0 || day === 6) { // 0 - Неділя, 6 - Субота
             alert(translations[lang].alertWeekend);
             inputElement.value = '';
         }
