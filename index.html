@@ -49,11 +49,6 @@ body{
     position: relative;
 }
 
-@keyframes fadeUp{
-    from{ opacity:0; transform:translateY(25px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
 .header{ text-align:center; margin-bottom:24px; }
 .logo{ width:130px; max-width:100%; margin-bottom:14px; }
 h1{ font-size:28px; font-weight:800; letter-spacing:-0.7px; color:var(--primary); }
@@ -239,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ✨ Встановлюємо сьогоднішній день як мінімальний
     const today = new Date().toISOString().split('T')[0];
     
     const checkWeekend = (inputElement) => {
@@ -344,41 +340,40 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Sending...';
+        // 🚀 МИТТЄВИЙ ПЕРЕХІД У ДОДАТОК WHATSAPP (Захист від блокування Android та iOS)
+        const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
+        
+        // Відкриваємо месенджер одразу по прямій команді кліку!
+        window.location.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`;
+        
+        // Показуємо екран успіху
+        document.getElementById('successScreen').classList.add('active');
 
-        let fetchPromises = tripsArray.map(trip => {
-            return fetch(GOOGLE_SCRIPT_URL, {
+        // Фонове відправлення даних до Google Таблиці за допомогою надійного асинхронного fetch
+        tripsArray.forEach(trip => {
+            const payload = {
+                cognome: cognome,
+                nome: nome,
+                citta: citta,
+                indirizzo: indirizzo,
+                date: trip.date,
+                time: trip.time,
+                note: noteText
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cognome: cognome, nome: nome, citta: citta, indirizzo: indirizzo, date: trip.date, time: trip.time, note: noteText })
-            });
+                body: JSON.stringify(payload)
+            }).catch(err => console.log('Background sync error:', err));
         });
 
-        Promise.all(fetchPromises)
-            .then(() => {
-                document.getElementById('successScreen').classList.add('active');
-                
-                setTimeout(() => {
-                    const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
-                    
-                    // ✨ ФІНАЛЬНЕ УНІВЕРСАЛЬНЕ ПЕРЕНАПРАВЛЕННЯ (Миттєво запускає додаток і на Android, і на iPhone)
-                    window.location.href = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`;
-                    
-                    setTimeout(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerText = translations[lang].btnSubmit;
-                        document.getElementById('successScreen').classList.remove('active');
-                    }, 1500);
-                }, 1500);
-            })
-            .catch(err => {
-                console.log('Error:', err);
-                submitBtn.disabled = false;
-                submitBtn.innerText = translations[lang].btnSubmit;
-            });
+        // Повертаємо форму в початковий стан через 3 секунди, коли додаток вже згорнуто
+        setTimeout(() => {
+            document.getElementById('successScreen').classList.remove('active');
+        }, 3000);
     });
 });
 </script>
