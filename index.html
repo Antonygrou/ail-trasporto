@@ -24,15 +24,8 @@
     --shadow: 0 24px 60px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    -webkit-tap-highlight-color:transparent;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ -webkit-tap-highlight-color:transparent; }
 
 body{
     font-family:'Inter',sans-serif;
@@ -46,9 +39,7 @@ body{
         max(20px, env(safe-area-inset-right))
         max(20px, env(safe-area-inset-bottom))
         max(20px, env(safe-area-inset-left));
-    background:
-        linear-gradient(rgba(0,0,0,0.34), rgba(0,0,0,0.34)),
-        url('background.jpg');
+    background: linear-gradient(rgba(0,0,0,0.34), rgba(0,0,0,0.34)), url('background.jpg');
     background-size:cover;
     background-position:center center;
     background-repeat:no-repeat;
@@ -75,32 +66,10 @@ body{
     to{ opacity:1; transform:translateY(0); }
 }
 
-.header{
-    text-align:center;
-    margin-bottom:24px;
-}
-
-.logo{
-    width:130px;
-    max-width:100%;
-    margin-bottom:14px;
-}
-
-h1{
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:-0.7px;
-    color:var(--primary);
-}
-
-.subtitle{
-    margin-top:4px;
-    font-size:14px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.6px;
-    color:#111111;
-}
+.header{ text-align:center; margin-bottom:24px; }
+.logo{ width:130px; max-width:100%; margin-bottom:14px; }
+h1{ font-size:28px; font-weight:800; letter-spacing:-0.7px; color:var(--primary); }
+.subtitle{ margin-top:4px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#111111; }
 
 .info-box{
     background:#ffebee;
@@ -114,139 +83,54 @@ h1{
     font-weight:600;
 }
 
-.grid-2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-.form-group{
-    margin-bottom:16px;
-    width:100%;
-}
-
-.inner-label{
-    display:block;
-    margin-bottom:7px;
-    font-size:11px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.8px;
-    color:#111111;
-}
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-group{ margin-bottom:16px; width:100%; }
+.inner-label{ display:block; margin-bottom:7px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:#111111; }
 
 input, button{ font-size:16px; }
-
 input{
-    width:100%;
-    height:54px;
-    border:1px solid rgba(0,0,0,0.15);
-    border-radius:16px;
-    padding:0 16px;
-    font-size:16px;
-    font-weight:500;
-    color:var(--text);
-    background:#ffffff;
-    appearance:none;
-    -webkit-appearance:none;
-    transition:all .2s ease;
+    width:100%; height:54px; border:1px solid rgba(0,0,0,0.15); border-radius:16px; padding:0 16px;
+    font-size:16px; font-weight:500; color:var(--text); background:#ffffff;
+    appearance:none; -webkit-appearance:none; transition:all .2s ease;
 }
-
 input::placeholder{ color:#8a8a8a; }
-input:focus{
-    outline:none;
-    border-color:var(--primary);
-    box-shadow:0 0 0 4px rgba(211,47,47,0.14);
-    background:white;
-}
+input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(211,47,47,0.14); background:white; }
 
 .trip-row{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    background:rgba(0, 0, 0, 0.03);
-    border:1px solid rgba(0, 0, 0, 0.08);
-    border-radius:18px;
-    padding:14px;
-    margin-bottom:14px;
-    animation:fadeIn .3s ease;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    background:rgba(0, 0, 0, 0.03); border:1px solid rgba(0, 0, 0, 0.08); border-radius:18px;
+    padding:14px; margin-bottom:14px; animation:fadeIn .3s ease;
 }
 
-@keyframes fadeIn{
-    from{ opacity:0; transform:translateY(10px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-.trip-field{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-}
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+.trip-field{ display:flex; flex-direction:column; min-width:0; }
 
 .btn-add-date{
-    width:100%;
-    border:1px dashed var(--primary);
-    background:rgba(211,47,47,0.08);
-    color:var(--primary);
-    border-radius:14px;
-    padding:14px;
-    margin-top:2px;
-    margin-bottom:14px;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-    transition:all .25s cubic-bezier(.175,.885,.32,1.275);
+    width:100%; border:1px dashed var(--primary); background:rgba(211,47,47,0.08); color:var(--primary);
+    border-radius:14px; padding:14px; margin-top:2px; margin-bottom:14px; font-size:13px; font-weight:700;
+    cursor:pointer; transition:all .25s cubic-bezier(.175,.885,.32,1.275);
 }
 .btn-add-date:hover{ background:rgba(211,47,47,0.14); }
 .btn-add-date:active{ transform:scale(.98); }
 
 .btn-remove-date{
-    grid-column: span 2;
-    width:100%;
-    height:40px;
-    border:none;
-    border-radius:12px;
-    background:var(--primary);
-    color:white;
-    font-size:13px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    cursor:pointer;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-top:4px;
-    box-shadow:0 5px 12px rgba(211,47,47,0.25);
-    transition:all .2s ease;
+    grid-column: span 2; width:100%; height:40px; border:none; border-radius:12px; background:var(--primary);
+    color:white; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+    cursor:pointer; display:flex; justify-content:center; align-items:center; margin-top:4px;
+    box-shadow:0 5px 12px rgba(211,47,47,0.25); transition:all .2s ease;
 }
 .btn-remove-date:hover{ background:var(--primary-dark); }
 .btn-remove-date:active{ transform:scale(.98); }
 
 .btn-submit{
-    width:100%;
-    margin-top:10px;
-    border:none;
-    border-radius:18px;
-    background:var(--green);
-    color:white;
-    height:58px;
-    font-size:17px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 10px 24px rgba(37,211,102,0.32);
+    width:100%; margin-top:10px; border:none; border-radius:18px; background:var(--green); color:white; height:58px;
+    font-size:17px; font-weight:700; cursor:pointer; box-shadow:0 10px 24px rgba(37,211,102,0.32);
     transition:all .25s cubic-bezier(.175,.885,.32,1.275);
 }
 .btn-submit:hover{ background:var(--green-dark); transform:translateY(-2px); }
 .btn-submit:active{ transform:scale(.98); }
 
-.footer{
-    margin-top:18px;
-    text-align:center;
-    font-size:12px;
-    font-weight:600;
-    color:rgba(0,0,0,0.65);
-}
+.footer{ margin-top:18px; text-align:center; font-size:12px; font-weight:600; color:rgba(0,0,0,0.65); }
 
 @media (max-width:480px){
     body{ background-position:62% center; }
@@ -328,4 +212,200 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const MAX_TRIPS = 5;
-    const WHATSAPP_NUMBER = '
+    const WHATSAPP_NUMBER = '393792857328';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEUXcDrcnmTcBn1UwHqbyBuu_2wnm8-L12hCbj1sS3fTTWy5qFZF_tS66o4HTv0a6Eug/exec';
+
+    const translations = {
+        uk: {
+            subtitle: "Бронювання часу транспортування",
+            infobox: "<strong>Служба транспорту:</strong> Заповніть необхідні поля. Деталі будуть відкриті безпосередньо у WhatsApp.",
+            cognome: "Прізвище",
+            nome: "Ім'я",
+            citta: "Місто",
+            indirizzo: "Вулиця та номер будинку",
+            note: "Додаткові примітки (Необов'язково)",
+            titleTrips: "Дати та час поїздок",
+            rowData: "Data 🗓️",
+            rowOra: "Ora ⏰",
+            btnAdd: "+ Додати інший день (Макс 5)",
+            btnSubmit: "Відкрити у WhatsApp",
+            btnRemove: "Видалити цей день",
+            alertFill: "Будь ласка, заповніть усі необхідні поля.",
+            alertDates: "Будь ласка, встановіть дату та час для всіх доданих днів."
+        },
+        it: {
+            subtitle: "Prenotazione Orario di Trasporto",
+            infobox: "<strong>Servizio Trasporto:</strong> Compila i campi richiesti. I dettagli verranno aperti direttamente su WhatsApp.",
+            cognome: "Cognome",
+            nome: "Nome",
+            citta: "Città",
+            indirizzo: "Via e Civico",
+            note: "Note aggiuntive (Opzionale)",
+            titleTrips: "Date e Orari Trasporti",
+            rowData: "Data 🗓️",
+            rowOra: "Ora ⏰",
+            btnAdd: "+ Aggiungi un altro giorno (Max 5)",
+            btnSubmit: "Apri su WhatsApp",
+            btnRemove: "Elimina questo giorno",
+            alertFill: "Per favore, compila tutti i campi richiesti.",
+            alertDates: "Per favore, imposta data e ora per tutti i giorni aggiunti."
+        }
+    };
+
+    const userLang = navigator.language || navigator.userLanguage;
+    const lang = userLang.startsWith('uk') ? 'uk' : 'it';
+
+    document.getElementById('lang-subtitle').innerText = translations[lang].subtitle;
+    document.getElementById('lang-infobox').innerHTML = translations[lang].infobox;
+    document.getElementById('lang-cognome').innerText = translations[lang].cognome;
+    document.getElementById('lang-nome').innerText = translations[lang].nome;
+    document.getElementById('lang-citta').innerText = translations[lang].citta;
+    document.getElementById('lang-indirizzo').innerText = translations[lang].indirizzo;
+    document.getElementById('lang-note').innerText = translations[lang].note;
+    document.getElementById('lang-title-trips').innerText = translations[lang].titleTrips;
+    document.querySelector('.lang-row-data').innerText = translations[lang].rowData;
+    document.querySelector('.lang-row-ora').innerText = translations[lang].rowOra;
+    document.getElementById('addTripBtn').innerText = translations[lang].btnAdd;
+    document.getElementById('submitBtn').innerText = translations[lang].btnSubmit;
+
+    const container = document.getElementById('tripsContainer');
+    const addBtn = document.getElementById('addTripBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const fields = ['cognome', 'nome', 'citta', 'indirizzo'];
+    fields.forEach(field => {
+        const inputElement = document.getElementById(field);
+        if (localStorage.getItem('ail_' + field)) {
+            inputElement.value = localStorage.getItem('ail_' + field);
+        }
+        inputElement.addEventListener('input', () => {
+            localStorage.setItem('ail_' + field, inputElement.value);
+        });
+    });
+
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll('.date-input').forEach(input => { input.min = today; });
+
+    const sanitize = (text) => text.replace(/[<>]/g, '').trim();
+
+    const getItalianDayName = (dateString) => {
+        const days = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+        const dateParts = dateString.split('-');
+        const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+        return days[dateObj.getDay()];
+    };
+
+    const formatDate = (date) => {
+        const [year, month, day] = date.split('-');
+        return `${day}/${month}/${year}`;
+    };
+
+    const updateAddButton = () => {
+        const rows = document.querySelectorAll('.trip-row');
+        addBtn.style.display = rows.length >= MAX_TRIPS ? 'none' : 'block';
+    };
+
+    const createTripRow = () => {
+        const rows = document.querySelectorAll('.trip-row');
+        if (rows.length >= MAX_TRIPS) return;
+
+        const row = document.createElement('div');
+        row.className = 'trip-row';
+
+        row.innerHTML = `
+            <div class="trip-field">
+                <label class="inner-label" style="font-size:10px;color:var(--text-light)">${translations[lang].rowData}</label>
+                <input type="date" class="date-input" required />
+            </div>
+            <div class="trip-field">
+                <label class="inner-label" style="font-size:10px;color:var(--text-light)">${translations[lang].rowOra}</label>
+                <input type="time" class="time-input" required />
+            </div>
+            <button type="button" class="btn-remove-date">${translations[lang].btnRemove}</button>
+        `;
+
+        row.querySelector('.btn-remove-date').addEventListener('click', () => {
+            row.remove();
+            updateAddButton();
+        });
+
+        container.appendChild(row);
+        row.querySelector('.date-input').min = today;
+        updateAddButton();
+    };
+
+    addBtn.addEventListener('click', createTripRow);
+
+    submitBtn.addEventListener('click', () => {
+        const cognomeInput = document.getElementById('cognome');
+        const nomeInput = document.getElementById('nome');
+        const cittaInput = document.getElementById('citta');
+        const indirizzoInput = document.getElementById('indirizzo');
+        const noteInput = document.getElementById('note');
+
+        if (!cognomeInput.value || !nomeInput.value || !cittaInput.value || !indirizzoInput.value) {
+            alert(translations[lang].alertFill);
+            return;
+        }
+
+        const cognome = sanitize(cognomeInput.value);
+        const nome = sanitize(nomeInput.value);
+        const citta = sanitize(cittaInput.value);
+        const indirizzo = sanitize(indirizzoInput.value);
+        const noteText = noteInput.value ? sanitize(noteInput.value) : 'Nessuna';
+
+        const rows = document.querySelectorAll('.trip-row');
+        let whatsappTrips = '';
+        let valid = true;
+        let tripsArray = [];
+
+        rows.forEach((row, index) => {
+            const dateInput = row.querySelector('.date-input');
+            const timeInput = row.querySelector('.time-input');
+
+            if (!dateInput.value || !timeInput.value) {
+                valid = false;
+                return;
+            }
+            
+            tripsArray.push({
+                date: dateInput.value,
+                time: timeInput.value
+            });
+
+            const formattedDate = formatDate(dateInput.value);
+            const dayName = getItalianDayName(dateInput.value);
+            whatsappTrips += `   ${index + 1}) *${dayName}* - ${formattedDate} ➜ ore *${timeInput.value}*\n`;
+        });
+
+        if (!valid) {
+            alert(translations[lang].alertDates);
+            return;
+        }
+
+        tripsArray.forEach(trip => {
+            const payload = {
+                cognome: cognome,
+                nome: nome,
+                citta: citta,
+                indirizzo: indirizzo,
+                date: trip.date,
+                time: trip.time
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(err => console.log('Errore database:', err));
+        });
+
+        const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
+        window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
+    });
+});
+</script>
+</body>
+</html>
