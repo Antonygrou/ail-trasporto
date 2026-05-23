@@ -4,12 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>AIL Novara - Prenotazione Trasporto</title>
-<link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#d32f2f" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="AIL Trasporto" />
-<link rel="apple-touch-icon" href="icon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
@@ -34,11 +28,7 @@ body{
     justify-content:center;
     align-items:center;
     overflow-x:hidden;
-    padding:
-        max(20px, env(safe-area-inset-top))
-        max(20px, env(safe-area-inset-right))
-        max(20px, env(safe-area-inset-bottom))
-        max(20px, env(safe-area-inset-left));
+    padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
     background: linear-gradient(rgba(0,0,0,0.34), rgba(0,0,0,0.34)), url('background.jpg');
     background-size:cover;
     background-position:center center;
@@ -56,9 +46,6 @@ body{
     border-radius:var(--radius);
     padding:28px;
     box-shadow:var(--shadow);
-    transform:translateZ(0);
-    will-change:transform;
-    animation:fadeUp .5s cubic-bezier(.23,1,.32,1);
     position: relative;
 }
 
@@ -73,15 +60,7 @@ h1{ font-size:28px; font-weight:800; letter-spacing:-0.7px; color:var(--primary)
 .subtitle{ margin-top:4px; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#111111; }
 
 .info-box{
-    background:#ffebee;
-    border-left:4px solid var(--primary);
-    border-radius:18px;
-    padding:15px;
-    margin-bottom:24px;
-    font-size:13px;
-    line-height:1.5;
-    color:var(--primary-dark);
-    font-weight:600;
+    background:#ffebee; border-left:4px solid var(--primary); border-radius:18px; padding:15px; margin-bottom:24px; font-size:13px; line-height:1.5; color:var(--primary-dark); font-weight:600;
 }
 
 .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
@@ -90,69 +69,44 @@ h1{ font-size:28px; font-weight:800; letter-spacing:-0.7px; color:var(--primary)
 
 input, button{ font-size:16px; }
 input{
-    width:100%; height:54px; border:1px solid rgba(0,0,0,0.15); border-radius:16px; padding:0 16px;
-    font-size:16px; font-weight:500; color:var(--text); background:#ffffff;
-    appearance:none; -webkit-appearance:none; transition:all .2s ease;
+    width:100%; height:54px; border:1px solid rgba(0,0,0,0.15); border-radius:16px; padding:0 16px; font-size:16px; font-weight:500; color:var(--text); background:#ffffff; appearance:none; -webkit-appearance:none; transition:all .2s ease;
 }
 input::placeholder{ color:#8a8a8a; }
 input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(211,47,47,0.14); background:white; }
 
 .trip-row{
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    background:rgba(0, 0, 0, 0.03); border:1px solid rgba(0, 0, 0, 0.08); border-radius:18px;
-    padding:14px; margin-bottom:14px; animation:fadeIn .3s ease;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background:rgba(0, 0, 0, 0.03); border:1px solid rgba(0, 0, 0, 0.08); border-radius:18px; padding:14px; margin-bottom:14px;
 }
-
-@keyframes fadeIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
 .trip-field{ display:flex; flex-direction:column; min-width:0; }
 
 .btn-add-date{
-    width:100%; border:1px dashed var(--primary); background:rgba(211,47,47,0.08); color:var(--primary);
-    border-radius:14px; padding:14px; margin-top:2px; margin-bottom:14px; font-size:13px; font-weight:700;
-    cursor:pointer; transition:all .25s cubic-bezier(.175,.885,.32,1.275);
+    width:100%; border:1px dashed var(--primary); background:rgba(211,47,47,0.08); color:var(--primary); border-radius:14px; padding:14px; margin-top:2px; margin-bottom:14px; font-size:13px; font-weight:700; cursor:pointer;
 }
-.btn-add-date:hover{ background:rgba(211,47,47,0.14); }
-.btn-add-date:active{ transform:scale(.98); }
 
 .btn-remove-date{
-    grid-column: span 2; width:100%; height:40px; border:none; border-radius:12px; background:var(--primary);
-    color:white; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
-    cursor:pointer; display:flex; justify-content:center; align-items:center; margin-top:4px;
-    box-shadow:0 5px 12px rgba(211,47,47,0.25); transition:all .2s ease;
+    grid-column: span 2; width:100%; height:40px; border:none; border-radius:12px; background:var(--primary); color:white; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; cursor:pointer; display:flex; justify-content:center; align-items:center; margin-top:4px;
 }
-.btn-remove-date:hover{ background:var(--primary-dark); }
-.btn-remove-date:active{ transform:scale(.98); }
 
 .btn-submit{
-    width:100%; margin-top:10px; border:none; border-radius:18px; background:var(--green); color:white; height:58px;
-    font-size:17px; font-weight:700; cursor:pointer; box-shadow:0 10px 24px rgba(37,211,102,0.32);
-    transition:all .25s cubic-bezier(.175,.885,.32,1.275);
+    width:100%; margin-top:10px; border:none; border-radius:18px; background:var(--green); color:white; height:58px; font-size:17px; font-weight:700; cursor:pointer; box-shadow:0 10px 24px rgba(37,211,102,0.32);
 }
-.btn-submit:hover{ background:var(--green-dark); transform:translateY(-2px); }
-.btn-submit:active{ transform:scale(.98); }
+.btn-submit:hover{ background:var(--green-dark); }
 
 .footer{ margin-top:18px; text-align:center; font-size:12px; font-weight:600; color:rgba(0,0,0,0.65); }
 
 .success-screen {
-    position: absolute; top:0; left:0; width:100%; height:100%;
-    background:#ffffff; border-radius:var(--radius);
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    padding:30px; text-align:center; opacity:0; pointer-events:none;
-    transition: opacity 0.4s ease; z-index: 10;
+    position: absolute; top:0; left:0; width:100%; height:100%; background:#ffffff; border-radius:var(--radius); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:30px; text-align:center; opacity:0; pointer-events:none; transition: opacity 0.4s ease; z-index: 10;
 }
 .success-screen.active { opacity:1; pointer-events:auto; }
-.success-icon { width:80px; height:80px; background:#e8f5e9; color:var(--green); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:42px; font-weight:bold; margin-bottom:20px; animation: popIn 0.5s cubic-bezier(.175,.885,.32,1.275); }
+.success-icon { width:80px; height:80px; background:#e8f5e9; color:var(--green); border-radius:50%; display:flex; justify-content:center; align-items:center; font-size:42px; font-weight:bold; margin-bottom:20px; }
 .success-title { font-size:24px; font-weight:800; color:#2e7d32; margin-bottom:10px; }
 .success-text { font-size:15px; font-weight:600; color:#555555; line-height:1.5; }
-
-@keyframes popIn { from { transform:scale(0); } to { transform:scale(1); } }
 
 @media (max-width:480px){
     body{ background-position:62% center; }
     .container{ padding:22px; }
     .grid-2{ grid-template-columns:1fr; gap:0; }
     .trip-row{ grid-template-columns: 1fr 1fr; gap: 12px; }
-    h1{ font-size:25px; }
 }
 </style>
 </head>
@@ -168,7 +122,7 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
     <div class="header">
         <img src="logo.png" alt="AIL Logo" class="logo" />
         <h1 id="lang-title">AIL Novara</h1>
-        <p class="subtitle" id="lang-subtitle">Prenotazione Orario di Transporto</p>
+        <p class="subtitle" id="lang-subtitle">Prenotazione Orario di Trasporto</p>
     </div>
 
     <div class="info-box" id="lang-infobox">
@@ -179,28 +133,28 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
         <div class="grid-2">
             <div class="form-group">
                 <label class="inner-label" for="cognome" id="lang-cognome">Cognome</label>
-                <input type="text" id="cognome" placeholder="Es. Rossi" required enterkeyhint="next" />
+                <input type="text" id="cognome" placeholder="Es. Rossi" required />
             </div>
             <div class="form-group">
                 <label class="inner-label" for="nome" id="lang-nome">Nome</label>
-                <input type="text" id="nome" placeholder="Es. Giulio" required enterkeyhint="next" />
+                <input type="text" id="nome" placeholder="Es. Giulio" required />
             </div>
         </div>
 
         <div class="grid-2">
             <div class="form-group">
                 <label class="inner-label" for="citta" id="lang-citta">Città</label>
-                <input type="text" id="citta" placeholder="Es. Novara" required enterkeyhint="next" />
+                <input type="text" id="citta" placeholder="Es. Novara" required />
             </div>
             <div class="form-group">
                 <label class="inner-label" for="indirizzo" id="lang-indirizzo">Via e Civico</label>
-                <input type="text" id="indirizzo" placeholder="Es. Via Verga 12" required enterkeyhint="next" />
+                <input type="text" id="indirizzo" placeholder="Es. Via Verga 12" required />
             </div>
         </div>
 
         <div class="form-group">
             <label class="inner-label" for="note" id="lang-note">Note aggiuntive (Opzionale)</label>
-            <input type="text" id="note" placeholder="Es. sedia a rotelle, accompagnatore..." enterkeyhint="done" />
+            <input type="text" id="note" placeholder="Es. sedia a rotelle, accompagnatore..." />
         </div>
 
         <div class="form-group">
@@ -217,7 +171,6 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
                     </div>
                 </div>
             </div>
-
             <button type="button" class="btn-add-date" id="addTripBtn">+ Aggiungi un altro giorno (Max 5)</button>
         </div>
 
@@ -228,54 +181,28 @@ input:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgb
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
-    }
-
     const MAX_TRIPS = 5;
     const WHATSAPP_NUMBER = '393792857328';
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwEjTx89kHbJ_gOtiR4JBs-SDkY1y8N04zgKB_IZNfzCVQgcBvfL3uMREY0N2eK0d9Eng/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTP8-DmS7qZo7Ok2yFVLiIEXV_XWUtiLjlvtr1-7jpzOhfUgormGsITvD-4ex8KLb4Hg/exec';
 
     const translations = {
         uk: {
             subtitle: "Бронювання часу транспортування",
             infobox: "<strong>Служба транспорту:</strong> Заповніть необхідні поля. Деталі будуть відкриті безпосередньо у WhatsApp.",
-            cognome: "Прізвище",
-            nome: "Ім'я",
-            citta: "Місто",
-            indirizzo: "Вулиця та номер будинку",
-            note: "Додаткові примітки (Необов'язково)",
-            titleTrips: "Дати та час поїздок",
-            rowData: "Data 🗓️",
-            rowOra: "Ora ⏰",
-            btnAdd: "+ Додати інший день (Макс 5)",
-            btnSubmit: "Відкрити у WhatsApp",
-            btnRemove: "Видалити цей день",
-            alertFill: "Будь ласка, заповніть усі необхідні поля.",
-            alertDates: "Будь ласка, встановіть дату та час для всіх доданих днів.",
-            alertWeekend: "Увага: у суботу та неділю служба транспортування не працює. Будь ласка, оберіть будній день.",
-            successTitle: "Заявку успішно створено!",
-            successText: "Дані записані в таблицю. Зараз відкриється WhatsApp для фінального підтвердження диспетчеру."
+            cognome: "Прізвище", nome: "Ім'я", citta: "Місто", indirizzo: "Вулиця та номер будинку", note: "Додаткові примітки (Необов'язково)",
+            titleTrips: "Дати та час поїздок", rowData: "Data 🗓️", rowOra: "Ora ⏰", btnAdd: "+ Додати інший день (Макс 5)",
+            btnSubmit: "Відкрити у WhatsApp", btnRemove: "Видалити цей день", alertFill: "Будь ласка, заповніть усі необхідні поля.",
+            alertDates: "Будь ласка, встановіть дату та час для всіх доданих днів.", alertWeekend: "Увага: у суботу та неділю служба транспортування не працює. Будь ласка, оберіть будній день.",
+            successTitle: "Заявку успішно створено!", successText: "Дані записані в таблицю. Зараз відкриється WhatsApp для фінального підтвердження диспетчеру."
         },
         it: {
             subtitle: "Prenotazione Orario di Trasporto",
             infobox: "<strong>Servizio Trasporto:</strong> Compila i campi richiesti. I dettagli verranno aperti direttamente su WhatsApp.",
-            cognome: "Cognome",
-            nome: "Nome",
-            citta: "Città",
-            indirizzo: "Via e Civico",
-            note: "Note aggiuntive (Opzionale)",
-            titleTrips: "Date e Orari Trasporti",
-            rowData: "Data 🗓️",
-            rowOra: "Ora ⏰",
-            btnAdd: "+ Aggiungi un altro giorno (Max 5)",
-            btnSubmit: "Apri su WhatsApp",
-            btnRemove: "Elimina questo giorno",
-            alertFill: "Per favore, compila tutti i campi richiesti.",
-            alertDates: "Per favore, imposta data e ora per tutti i giorni aggiunti.",
-            alertWeekend: "Servizio non disponibile nei fine settimana (Sabato e Domenica). Scegli un giorno feriale.",
-            successTitle: "Inviato con successo!",
-            successText: "I dettagli sono stati salvati. Adesso si aprirà WhatsApp per confermare l'invio."
+            cognome: "Cognome", nome: "Nome", citta: "Città", indirizzo: "Via e Civico", note: "Note aggiuntive (Opzionale)",
+            titleTrips: "Date e Orari Trasporti", rowData: "Data 🗓️", rowOra: "Ora ⏰", btnAdd: "+ Aggiungi un altro giorno (Max 5)",
+            btnSubmit: "Apri su WhatsApp", btnRemove: "Elimina questo giorno", alertFill: "Per favore, compila tutti i campi richiesti.",
+            alertDates: "Per favore, imposta data e ora per tutti i giorni aggiunti.", alertWeekend: "Servizio non disponibile nei fine settimana (Sabato e Domenica). Scegli un giorno feriale.",
+            successTitle: "Inviato con successo!", successText: "I dettagli sono stati salvati. Adesso si aprirà WhatsApp per confermare l'invio."
         }
     };
 
@@ -314,14 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const today = new Date().toISOString().split('T')[0];
     
-    // ✨ БЕЗПЕЧНА ПЕРЕВІРКА ВИХІДНИХ БЕЗ ЗСУВУ ЧАСУ
     const checkWeekend = (inputElement) => {
         if (!inputElement.value) return;
         const parts = inputElement.value.split('-');
-        // Створюємо дату локально суто по цифрах року-місяця-дня
         const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
         const day = dateObj.getDay();
-        if (day === 0 || day === 6) { // 0 - Неділя, 6 - Субота
+        if (day === 0 || day === 6) {
             alert(translations[lang].alertWeekend);
             inputElement.value = '';
         }
@@ -346,8 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateAddButton = () => {
-        const rows = document.querySelectorAll('.trip-row');
-        addBtn.style.display = rows.length >= MAX_TRIPS ? 'none' : 'block';
+        addBtn.style.display = document.querySelectorAll('.trip-row').length >= MAX_TRIPS ? 'none' : 'block';
     };
 
     const createTripRow = () => {
@@ -356,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const row = document.createElement('div');
         row.className = 'trip-row';
-
         row.innerHTML = `
             <div class="trip-field">
                 <label class="inner-label" style="font-size:10px;color:var(--text-light)">${translations[lang].rowData}</label>
@@ -372,11 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateInp = row.querySelector('.date-input');
         dateInp.min = today;
         dateInp.addEventListener('change', () => checkWeekend(dateInp));
-
-        row.querySelector('.btn-remove-date').addEventListener('click', () => {
-            row.remove();
-            updateAddButton();
-        });
+        row.querySelector('.btn-remove-date').addEventListener('click', () => { row.remove(); updateAddButton(); });
 
         container.appendChild(row);
         updateAddButton();
@@ -416,14 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            tripsArray.push({
-                date: dateInput.value,
-                time: timeInput.value
-            });
-
-            const formattedDate = formatDate(dateInput.value);
-            const dayName = getItalianDayName(dateInput.value);
-            whatsappTrips += `   ${index + 1}) *${dayName}* - ${formattedDate} ➜ ore *${timeInput.value}*\n`;
+            tripsArray.push({ date: dateInput.value, time: timeInput.value });
+            whatsappTrips += `   ${index + 1}) *${getItalianDayName(dateInput.value)}* - ${formatDate(dateInput.value)} ➜ ore *${timeInput.value}*\n`;
         });
 
         if (!valid) {
@@ -435,22 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerText = 'Sending...';
 
         let fetchPromises = tripsArray.map(trip => {
-            const payload = {
-                cognome: cognome,
-                nome: nome,
-                citta: citta,
-                indirizzo: indirizzo,
-                date: trip.date,
-                time: trip.time,
-                note: noteText
-            };
-
             return fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ cognome: cognome, nome: nome, citta: citta, indirizzo: indirizzo, date: trip.date, time: trip.time, note: noteText })
             });
         });
 
@@ -460,12 +363,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 setTimeout(() => {
                     const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
-                    window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
                     
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = translations[lang].btnSubmit;
-                    document.getElementById('successScreen').classList.remove('active');
-                }, 2200);
+                    // ✨ ФІНАЛЬНЕ УНІВЕРСАЛЬНЕ ПЕРЕНАПРАВЛЕННЯ (Миттєво запускає додаток і на Android, і на iPhone)
+                    window.location.href = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`;
+                    
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = translations[lang].btnSubmit;
+                        document.getElementById('successScreen').classList.remove('active');
+                    }, 1500);
+                }, 1500);
             })
             .catch(err => {
                 console.log('Error:', err);
