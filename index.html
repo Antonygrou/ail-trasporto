@@ -9,25 +9,33 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="AIL Trasporto" />
-<link class="apple-touch-icon" href="icon.png" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
 :root{
     --primary:#d32f2f;
     --primary-dark:#b71c1c;
-    --green:#24D366;
-    --green-dark:#1bd15f;
-    --text:#000000;
-    --text-light:#1c1c1e;
+    --green:#25D366;
+    --green-dark:#128C7E;
+    --text:#111111;
+    --text-light:#555555;
     --radius:28px;
+    --shadow: 0 24px 60px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
-html{ -webkit-tap-highlight-color:transparent; }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    -webkit-tap-highlight-color:transparent;
+}
 
 body{
-    font-family:'Inter', sans-serif;
+    font-family:'Inter',sans-serif;
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -38,25 +46,28 @@ body{
         max(20px, env(safe-area-inset-right))
         max(20px, env(safe-area-inset-bottom))
         max(20px, env(safe-area-inset-left));
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('background.jpg');
+    background:
+        linear-gradient(rgba(0,0,0,0.34), rgba(0,0,0,0.34)),
+        url('background.jpg');
     background-size:cover;
     background-position:center center;
     background-repeat:no-repeat;
-    background-attachment: fixed;
     color:var(--text);
 }
 
 .container{
     width:100%;
     max-width:500px;
-    background: transparent;
-    border: none;
-    padding:10px 20px;
-    box-shadow: none;
+    background: rgba(255, 255, 255, 0.94);
+    border:1px solid rgba(255,255,255,0.22);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
     transform:translateZ(0);
     will-change:transform;
     animation:fadeUp .5s cubic-bezier(.23,1,.32,1);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1), 0 0 15px rgba(255,255,255,0.6);
 }
 
 @keyframes fadeUp{
@@ -64,90 +75,185 @@ body{
     to{ opacity:1; transform:translateY(0); }
 }
 
-.header{ text-align:center; margin-bottom:24px; }
-.logo{ width:140px; max-width:100%; margin-bottom:14px; filter: drop-shadow(0px 3px 6px rgba(255,255,255,0.9)); }
-h1{ font-size:30px; font-weight:900; letter-spacing:-0.8px; color:var(--primary); text-shadow: 0 2px 4px rgba(255, 255, 255, 1); }
-.subtitle{ margin-top:4px; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:#111111; }
+.header{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.logo{
+    width:130px;
+    max-width:100%;
+    margin-bottom:14px;
+}
+
+h1{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:-0.7px;
+    color:var(--primary);
+}
+
+.subtitle{
+    margin-top:4px;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:#111111;
+}
 
 .info-box{
-    background: rgba(255, 255, 255, 0.94);
-    border-left: 5px solid var(--primary);
-    border-radius:20px;
-    padding:16px;
-    margin-bottom:26px;
+    background:#ffebee;
+    border-left:4px solid var(--primary);
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:24px;
     font-size:13px;
     line-height:1.5;
     color:var(--primary-dark);
-    font-weight:700;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    text-shadow: none;
+    font-weight:600;
 }
 
-.grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
-.form-group{ margin-bottom:18px; width:100%; }
-.inner-label{ display:block; margin-bottom:8px; font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:0.9px; color:#000000; }
+.grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
 
-input, button{ font-size:16px; text-shadow: none; }
+.form-group{
+    margin-bottom:16px;
+    width:100%;
+}
+
+.inner-label{
+    display:block;
+    margin-bottom:7px;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.8px;
+    color:#111111;
+}
+
+input, button{ font-size:16px; }
+
 input{
-    width:100%; height:54px; border:2px solid rgba(255,255,255,0.8); border-radius:16px; padding:0 16px;
-    font-size:16px; font-weight:600; color:#000000; 
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    appearance:none; -webkit-appearance:none; transition:all .25s ease;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    width:100%;
+    height:54px;
+    border:1px solid rgba(0,0,0,0.15);
+    border-radius:16px;
+    padding:0 16px;
+    font-size:16px;
+    font-weight:500;
+    color:var(--text);
+    background:#ffffff;
+    appearance:none;
+    -webkit-appearance:none;
+    transition:all .2s ease;
 }
-input:focus{ outline:none; border-color:var(--primary); background: #ffffff; box-shadow:0 0 0 5px rgba(211,47,47,0.15); }
+
+input::placeholder{ color:#8a8a8a; }
+input:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px rgba(211,47,47,0.14);
+    background:white;
+}
 
 .trip-row{
-    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    border:2px solid rgba(255,255,255,0.9); border-radius:20px;
-    padding:16px; margin-bottom:16px; animation:fadeIn .3s ease;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background:rgba(0, 0, 0, 0.03);
+    border:1px solid rgba(0, 0, 0, 0.08);
+    border-radius:18px;
+    padding:14px;
+    margin-bottom:14px;
+    animation:fadeIn .3s ease;
 }
 
-@keyframes fadeIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
-.trip-field{ display:flex; flex-direction:column; min-width:0; }
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.trip-field{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+}
 
 .btn-add-date{
-    width:100%; border:2px dashed var(--primary); 
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    color:var(--primary); border-radius:16px; padding:15px; margin-top:2px; margin-bottom:16px; 
-    font-size:13px; font-weight:800; text-transform: uppercase; letter-spacing: 0.5px;
-    cursor:pointer; transition:all .25s cubic-bezier(.175,.885,.32,1.275);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    width:100%;
+    border:1px dashed var(--primary);
+    background:rgba(211,47,47,0.08);
+    color:var(--primary);
+    border-radius:14px;
+    padding:14px;
+    margin-top:2px;
+    margin-bottom:14px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .25s cubic-bezier(.175,.885,.32,1.275);
 }
-.btn-add-date:hover{ background:#ffffff; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+.btn-add-date:hover{ background:rgba(211,47,47,0.14); }
 .btn-add-date:active{ transform:scale(.98); }
 
 .btn-remove-date{
-    grid-column: span 2; width:100%; height:42px; border:none; border-radius:12px; background:var(--primary);
-    color:white; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.8px;
-    cursor:pointer; display:flex; justify-content:center; align-items:center; margin-top:4px;
-    box-shadow:0 4px 12px rgba(211,47,47,0.3); transition:all .2s ease;
+    grid-column: span 2;
+    width:100%;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:4px;
+    box-shadow:0 5px 12px rgba(211,47,47,0.25);
+    transition:all .2s ease;
 }
 .btn-remove-date:hover{ background:var(--primary-dark); }
 .btn-remove-date:active{ transform:scale(.98); }
 
 .btn-submit{
-    width:100%; margin-top:12px; border:none; border-radius:18px; background:var(--green); color:white; height:60px;
-    font-size:18px; font-weight:800; letter-spacing: 0.3px; cursor:pointer; 
-    box-shadow:0 10px 26px rgba(36,211,102,0.45);
+    width:100%;
+    margin-top:10px;
+    border:none;
+    border-radius:18px;
+    background:var(--green);
+    color:white;
+    height:58px;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(37,211,102,0.32);
     transition:all .25s cubic-bezier(.175,.885,.32,1.275);
 }
-.btn-submit:hover{ background:var(--green-dark); transform:translateY(-2px); box-shadow:0 12px 30px rgba(36,211,102,0.55); }
-.btn-submit:active{ transform:scale(.98); transform:translateY(0); }
+.btn-submit:hover{ background:var(--green-dark); transform:translateY(-2px); }
+.btn-submit:active{ transform:scale(.98); }
 
-.footer{ margin-top:24px; text-align:center; font-size:12px; font-weight:800; color:#000000; text-shadow: 0 1px 2px rgba(255,255,255,1); }
+.footer{
+    margin-top:18px;
+    text-align:center;
+    font-size:12px;
+    font-weight:600;
+    color:rgba(0,0,0,0.65);
+}
 
 @media (max-width:480px){
     body{ background-position:62% center; }
-    .container{ padding:10px 0px; }
+    .container{ padding:22px; }
     .grid-2{ grid-template-columns:1fr; gap:0; }
-    .trip-row{ grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 12px; }
-    h1{ font-size:27px; }
+    .trip-row{ grid-template-columns: 1fr 1fr; gap: 12px; }
+    h1{ font-size:25px; }
 }
 </style>
 </head>
@@ -156,7 +262,7 @@ input:focus{ outline:none; border-color:var(--primary); background: #ffffff; box
 <div class="container">
     <div class="header">
         <img src="logo.png" alt="AIL Logo" class="logo" />
-        <h1>AIL Novara</h1>
+        <h1 id="lang-title">AIL Novara</h1>
         <p class="subtitle" id="lang-subtitle">Prenotazione Orario di Trasporto</p>
     </div>
 
@@ -223,8 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MAX_TRIPS = 5;
     const WHATSAPP_NUMBER = '393792857328';
-    
-    // ✨ ОНОВЛЕНИЙ ЗВ'ЯЗОК З ТВОЇМ НОВИМ СКРИПТОМ GOOGLE
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEUXcDrcnmTcBn1UwHqbyBuu_2wnm8-L12hCbj1sS3fTTWy5qFZF_tS66o4HTv0a6Eug/exec';
 
     const translations = {
@@ -360,4 +464,64 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const cognome = sanitize(cognomeInput
+        const cognome = sanitize(cognomeInput.value);
+        const nome = sanitize(nomeInput.value);
+        const citta = sanitize(cittaInput.value);
+        const indirizzo = sanitize(indirizzoInput.value);
+        const noteText = noteInput.value ? sanitize(noteInput.value) : 'Nessuna';
+
+        const rows = document.querySelectorAll('.trip-row');
+        let whatsappTrips = '';
+        let valid = true;
+        let tripsArray = [];
+
+        rows.forEach((row, index) => {
+            const dateInput = row.querySelector('.date-input');
+            const timeInput = row.querySelector('.time-input');
+
+            if (!dateInput.value || !timeInput.value) {
+                valid = false;
+                return;
+            }
+            
+            tripsArray.push({
+                date: dateInput.value,
+                time: timeInput.value
+            });
+
+            const formattedDate = formatDate(dateInput.value);
+            const dayName = getItalianDayName(dateInput.value);
+            whatsappTrips += `   ${index + 1}) *${dayName}* - ${formattedDate} ➜ ore *${timeInput.value}*\n`;
+        });
+
+        if (!valid) {
+            alert(translations[lang].alertDates);
+            return;
+        }
+
+        tripsArray.forEach(trip => {
+            const payload = {
+                cognome: cognome,
+                nome: nome,
+                citta: citta,
+                indirizzo: indirizzo,
+                date: trip.date,
+                time: trip.time
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(err => console.log('Errore database:', err));
+        });
+
+        const whatsappText = `*PRENOTAZIONE TRASPORTO - AIL NOVARA*\n\n• *Cognome:* ${cognome}\n• *Nome:* ${nome}\n• *Indirizzo:* ${indirizzo}, ${citta} 📍\n• *Note:* ${noteText} 📝\n\n• *Viaggi richiesti:*\n\n${whatsappTrips}`;
+        window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(whatsappText)}`, '_blank');
+    });
+});
+</script>
+</body>
+</html>
